@@ -2,13 +2,15 @@ get_signup = (req, res) => {
     res.send('signup');
 }
 post_signup = (req, res) => {
-
+    console.log(req.body);
+    res.send('new signup')
 }
 get_login = (req, res) => {
     res.send('login');
 }
 post_login = (req, res) => {
-
+    console.log(req.body);
+    res.send('logged in')
 }
 // get_logout = () => {
 

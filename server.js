@@ -10,6 +10,8 @@ app.get('/', (req, res) => {
     res.json('test')
 })
 
+app.use(express.json());
+
 app.use(authRoutes);
 
 app.listen(PORT, () => {
