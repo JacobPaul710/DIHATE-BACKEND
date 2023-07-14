@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const connectionString = process.env.MONGO_DB_URI;
 
 mongoose.connect(connectionString);
-console.log(connectionString);
+// console.log(connectionString);
 
 mongoose.connection.on('connected', () => {
     console.log(`[${new Date().toLocaleTimeString()}] - MongoDB connected...🥗🍲 `)
