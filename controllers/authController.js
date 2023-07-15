@@ -20,16 +20,7 @@ const processErrors = (err, req) => {
     }
 
     //log in errors
-
-
-    if(err.code === 11000 && err.keyValue.username) {
-        errors.username = 'This Username is already in use.';
-    }
-    if(err.code === 11000 && err.keyValue.email) {
-        errors.email = 'This email is already in use.';
-    }
-
-
+  
     return errors;
     
 }
