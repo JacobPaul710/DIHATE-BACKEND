@@ -1,4 +1,12 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+const sessionLife = 604800; //number of seconds in 7 days
+
+const buildToken = (id) => {
+    return jwt.sign({ id },'8c0ccf17158a65a14ab57852e9270ec6b7c74c892fc59960bbf7fcc9ae63337f', 
+    {expiresIn: sessionLife}
+)};
 
 const processErrors = (err, req) => {
     console.log(err.message, err.code);
@@ -35,7 +43,9 @@ post_signup = async (req, res) => {
 
     try {
        const newUser = await User.create({ username, email, password });
-        res.json(newUser);
+       const token = buildToken(newUser._id);
+       res.cookie('jwt', token, {httpOnly: true, maxAge: sessionLife * 1000 })
+        res.json(newUser._id);
     }
     catch (err) {
         console.log(err.errors);

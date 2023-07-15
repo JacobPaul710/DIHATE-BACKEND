@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 
 app.use(express.json());
 
+app.get('/icebox', (req, res) => res.render('icebox.ejs'));
 app.use(authRoutes);
 
 app.listen(PORT, () => {
