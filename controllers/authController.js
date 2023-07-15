@@ -13,12 +13,13 @@ const processErrors = (err, req) => {
     }
 
     //validation errors
-    if (err.message.includes())
+    if (err.message.includes('User validation failed')) {
+        Object.values(err.errors).forEach(({properties}) => {
+            errors[properties.path] = properties.message;
+        })
+    }
 
     //log in errors
-    // if (err.message === 'incorrect email') {
-    //     errors.emails = 'That email is not registered';
-    // }
 
 
     if(err.code === 11000 && err.keyValue.username) {
