@@ -9,7 +9,7 @@ const buildToken = (id) => {
 )};
 
 const processErrors = (err, req) => {
-    console.log(err.message, err.code);
+    // console.log(err.message, err.code);
     let errors = { username: '', email: '', password: ''};
 
     //Sign up errors
@@ -28,6 +28,13 @@ const processErrors = (err, req) => {
     }
 
     //log in errors
+    if (err.message === 'incorrect email') {
+        errors.email = 'This email is not registered.';
+    }
+    if (err.message === 'incorrect password') {
+        errors.password = 'This password is incorrect.';
+    }
+
   
     return errors;
     
@@ -56,12 +63,25 @@ post_signup = async (req, res) => {
 get_login = (req, res) => {
     res.send('login');
 }
-post_login = (req, res) => {
+post_login = async  (req, res) => {
     // console.log(req.body);
     const { email, password } = req.body;
-    console.log(email, password);
-    res.send('logged in')
+    try {
+        const user = await User.userLogin(email, password);
+        const token = buildToken(user._id);
+        res.cookie('jwt', token, {httpOnly: true, maxAge: sessionLife * 1000 });
+        res.json({ user: user._id });
+        console.log(user._id);
+    } 
+    catch (err) {
+        const errors = processErrors(err);
+        res.json({ errors });
+        console.log(errors);
+    }
 }
+
+
+
 // get_logout = () => {
 
 // }
