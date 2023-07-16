@@ -51,11 +51,13 @@ post_signup = async (req, res) => {
     try {
        const newUser = await User.create({ username, email, password });
        const token = buildToken(newUser._id);
-       res.cookie('jwt', token, {httpOnly: true, maxAge: sessionLife * 1000 })
-        res.json(newUser._id);
+        console.log(token);
+       res.cookie('jwt', token, {httpOnly: true, secure: true, maxAge: sessionLife * 1000});
+        res.status(200).json(newUser._id);
+        console.log(newUser._id);
     }
     catch (err) {
-        console.log(err.errors);
+        console.log(err);
         const errors = processErrors(err);
         res.json({ errors });
     }
@@ -69,7 +71,7 @@ post_login = async  (req, res) => {
     try {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, maxAge: sessionLife * 1000 });
+        res.cookie('jwt', token, {httpOnly: true, secure: true, maxAge: sessionLife * 1000});
         res.json({ user: user._id });
         console.log(user._id);
     } 
