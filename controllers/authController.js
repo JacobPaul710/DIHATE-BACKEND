@@ -82,10 +82,11 @@ post_login = async  (req, res) => {
 
 
 
-// get_logout = () => {
+get_logout = (req, res) => {
+    res.cookie('jwt', '', {maxAge: 1 })
+    res.redirect('/');
+}
 
-// }
 
 
-
-module.exports = {get_signup, post_signup, get_login, post_login};
+module.exports = {get_signup, post_signup, get_login, post_login, get_logout};
