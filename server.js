@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 4000;
 const mongoose = require('./config/connection');
+const cookieParser = require('cookie-parser');
 
 const cors = require('cors');
 
@@ -19,9 +20,10 @@ app.use(cors({
 }
 ));
 app.use(express.json());
+app.use(cookieParser());
 
 // app.get('*', findUser);
-app.get('/icebox', authVerification, (req, res) => res.send('icebox page'));
+app.get('/icebox', authVerification, (req, res) => res.send('icebox'));
 app.use(authRoutes);
 
 app.listen(PORT, () => {
