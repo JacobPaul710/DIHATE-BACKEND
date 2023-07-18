@@ -52,8 +52,8 @@ post_signup = async (req, res) => {
        const newUser = await User.create({ username, email, password });
        const token = buildToken(newUser._id);
         console.log(token);
-       res.cookie('jwt', token, {httpOnly: true, secure: true, maxAge: sessionLife * 1000});
-        res.status(200).json(newUser._id);
+       res.cookie('jwt', token, {maxAge: sessionLife * 1000});
+        res.status(200).json(newUser._id, newUser.email, newUser.username);
         console.log(newUser._id);
     }
     catch (err) {
@@ -71,9 +71,11 @@ post_login = async  (req, res) => {
     try {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
-        res.cookie('jwt', token, {httpOnly: true, secure: true, maxAge: sessionLife * 1000});
-        res.json({ user: user._id });
-        console.log(user._id);
+        console.log(token);
+        res.cookie('jwt', token, {maxAge: sessionLife * 1000});
+        console.log(req.cookies)
+        res.json({  email: user.email, username: user.username });
+        // console.log(user._id);
     } 
     catch (err) {
         const errors = processErrors(err);

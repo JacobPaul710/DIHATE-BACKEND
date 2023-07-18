@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 4000;
 const mongoose = require('./config/connection');
 const cookieParser = require('cookie-parser');
 
+const meals = require('./routes/icebox')
+
 const cors = require('cors');
 
 const authRoutes = require('./routes/authRoutes');
@@ -23,7 +25,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 // app.get('*', findUser);
-app.get('/icebox', authVerification, (req, res) => res.send('icebox'));
+app.get('/icebox', authVerification, (req, res) => {
+    console.log(req.cookies)
+    console.log(meals);
+    console.log(req.body, "@@@@@@")
+    res.json(meals);
+});
+
 app.use(authRoutes);
 
 app.listen(PORT, () => {
