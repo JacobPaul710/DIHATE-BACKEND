@@ -11,7 +11,7 @@ const mealSchema = new mongoose.Schema(
             required: [true, "Please the number of servings being frozen."]
         },
         date: {
-            type: Number,
+            type: Date,
             required: [true, "Please enter the date this meal was cooked."]
         },
         user: {type: mongoose.Schema.Types.ObjectID, ref: 'User'}

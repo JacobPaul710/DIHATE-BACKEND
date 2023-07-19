@@ -14,61 +14,17 @@ get_icebox = async (req,res) => {
     }
 }
 
-module.exports = { get_icebox }
+new_meal = async (req, res) => {
+    try {
+        const user = req.body.id;
+        const { mealName, servings, date } = req.body;
+        console.log(req.body);
+        await Meal.create({ mealName, servings, date, user }) 
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 
+module.exports = { get_icebox, new_meal }
 
-// const meals =[{
-//     id: 1,
-//     servings: 5,
-//     mealName: 'spaghetti',
-//     date: '01/22/1990'
-// },
-// {
-//     id: 2,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 3,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 4,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 5,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 6,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 7,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 8,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// {
-//     id: 9,
-//     servings: 7,
-//     mealName: 'lasagna',
-//     date: '2/11/2000'
-// },
-// ]
