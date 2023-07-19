@@ -47,7 +47,7 @@ post_signup = async (req, res) => {
     try {
        const newUser = await User.create({ username, email, password });
        const token = buildToken(newUser._id);
-       res.cookie('jwt', token, {SameSite: 'None', domain: 'https://dihate-backend.onrender.com/',maxAge: sessionLife * 1000});
+       res.cookie('jwt', token, {SameSite: 'None', domain: 'dihate-backend.onrender.com/',maxAge: sessionLife * 1000});
         res.status(200).json({email: newUser.email, username: newUser.username});
     }
     catch (err) {
@@ -64,7 +64,7 @@ post_login = async  (req, res) => {
     try {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
-        res.cookie('jwt', token, {SameSite: 'None', domain: 'https://dihate-backend.onrender.com/',maxAge: sessionLife * 1000});
+        res.cookie('jwt', token, {SameSite: 'None', domain: 'dihate-backend.onrender.com/',maxAge: sessionLife * 1000});
         res.json({  email: user.email, username: user.username });
     } 
     catch (err) {
