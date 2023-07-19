@@ -51,10 +51,10 @@ post_signup = async (req, res) => {
     try {
        const newUser = await User.create({ username, email, password });
        const token = buildToken(newUser._id);
-        console.log(token);
+        // console.log(token);
        res.cookie('jwt', token, {maxAge: sessionLife * 1000});
-        res.status(200).json(newUser._id, newUser.email, newUser.username);
-        console.log(newUser._id);
+        res.status(200).json({email: newUser.email, username: newUser.username});
+        console.log(newUser.email);
     }
     catch (err) {
         console.log(err);
@@ -87,8 +87,15 @@ post_login = async  (req, res) => {
 
 
 get_logout = (req, res) => {
-    res.cookie('jwt', '', {maxAge: 1 })
-    res.redirect('/');
+    try {
+        res.cookie('jwt', '', {cacheControl: 'no-store', maxAge: 0 });
+        res.json('logged out')
+        console.log('LOGGED OUT!!!!!!!!');
+        console.log(res);
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
 
 

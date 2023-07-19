@@ -9,7 +9,7 @@ const authVerification = (req, res, next) => {
                     console.log(err.message);
                     res.json(err.message);
                 } else {
-                    console.log(decodedToken);
+                    // console.log(decodedToken);
                     req.body.id = decodedToken.id;
                     next();
                 }
