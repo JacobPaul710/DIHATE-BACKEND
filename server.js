@@ -22,8 +22,6 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-// app.get('*', findUser);
-
 app.use(authController);
 app.use(iceboxController)
 

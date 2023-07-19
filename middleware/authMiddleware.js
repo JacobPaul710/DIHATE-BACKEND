@@ -9,14 +9,13 @@ const authVerification = (req, res, next) => {
                     console.log(err.message);
                     res.json(err.message);
                 } else {
-                    // console.log(decodedToken);
                     req.body.id = decodedToken.id;
                     next();
                 }
             })
         } else {
             res.send('No User Logged in');
-            // console.log(err);
+            console.log(err);
         }
 }
 

@@ -9,7 +9,6 @@ const buildToken = (id) => {
 )};
 
 const processErrors = (err, req) => {
-    // console.log(err.message, err.code);
     let errors = { username: '', email: '', password: ''};
 
     //Sign up errors
@@ -35,7 +34,6 @@ const processErrors = (err, req) => {
         errors.password = 'This password is incorrect.';
     }
 
-  
     return errors;
     
 }
@@ -44,17 +42,13 @@ get_signup = (req, res) => {
     res.send('signup');
 }
 post_signup = async (req, res) => {
-    // console.log(req.body);
     const { username, email, password } = req.body;
-    // console.log(username, email, password);
 
     try {
        const newUser = await User.create({ username, email, password });
        const token = buildToken(newUser._id);
-        // console.log(token);
        res.cookie('jwt', token, {maxAge: sessionLife * 1000});
         res.status(200).json({email: newUser.email, username: newUser.username});
-        console.log(newUser.email);
     }
     catch (err) {
         console.log(err);
@@ -66,16 +60,12 @@ get_login = (req, res) => {
     res.send('login');
 }
 post_login = async  (req, res) => {
-    // console.log(req.body);
     const { email, password } = req.body;
     try {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
-        console.log(token);
         res.cookie('jwt', token, {maxAge: sessionLife * 1000});
-        console.log(req.cookies)
         res.json({  email: user.email, username: user.username });
-        // console.log(user._id);
     } 
     catch (err) {
         const errors = processErrors(err);
@@ -84,14 +74,12 @@ post_login = async  (req, res) => {
     }
 }
 
-
+ f
 
 get_logout = (req, res) => {
     try {
         res.cookie('jwt', '', {cacheControl: 'no-store', maxAge: 0 });
         res.json('logged out')
-        console.log('LOGGED OUT!!!!!!!!');
-        console.log(res);
     }
     catch (err) {
         console.log(err);
