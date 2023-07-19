@@ -20,11 +20,22 @@ new_meal = async (req, res) => {
         const { mealName, servings, date } = req.body;
         console.log(req.body);
         await Meal.create({ mealName, servings, date, user }) 
+        res.send('Created');
     }
     catch (error) {
         console.log(error);
     }
 }
 
-module.exports = { get_icebox, new_meal }
+delete_meal = async (req, res) => {
+    try {
+        const { id } = req.params
+        await Meal.findByIdAndDelete(id)
+        res.send('Deleted');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports = { get_icebox, new_meal, delete_meal }
 
