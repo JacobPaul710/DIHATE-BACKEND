@@ -74,8 +74,6 @@ post_login = async  (req, res) => {
     }
 }
 
- f
-
 get_logout = (req, res) => {
     try {
         res.cookie('jwt', '', {cacheControl: 'no-store', maxAge: 0 });
