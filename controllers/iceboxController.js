@@ -12,6 +12,8 @@ get_icebox = async (req,res) => {
 
 new_meal = async (req, res) => {
     try {
+        const user = req.body.id;
+        console.log({ user })
         const { mealName, servings, date } = req.body;
         await Meal.create({ mealName, servings, date, user }) 
         res.send('Created');
@@ -43,4 +45,3 @@ edit_meal = async (req, res) => {
 }
 
 module.exports = { get_icebox, new_meal, delete_meal, edit_meal }
-

@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(cors({
-    origin: ['https://main--do-i-have-anything-eat.netlify.app', 'http://localhost:3000'],
+    origin: 'http://localhost:3000',
     credentials: true,
 }
 ));
