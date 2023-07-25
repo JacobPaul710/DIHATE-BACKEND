@@ -64,7 +64,7 @@ post_login = async  (req, res) => {
     try {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
-        res.cookie('jwt', token, {sameSite: 'none', secure: true, domain: 'https://dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app', maxAge: sessionLife * 1000});
+        res.cookie('jwt', token, {sameSite: 'none', secure: true, domain: 'dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app', maxAge: sessionLife * 1000});
         res.json({  email: user.email, username: user.username });
     } 
     catch (err) {
