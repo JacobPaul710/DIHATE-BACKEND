@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(cors({
-    origin: 'https://dihate-backend.onrender.com',
+    origin: 'https://dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app',
     credentials: true,
 }
 ));
