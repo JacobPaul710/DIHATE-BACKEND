@@ -65,7 +65,7 @@ post_login = async  (req, res) => {
         const user = await User.userLogin(email, password);
         const token = buildToken(user._id);
         console.log(token, 'token')
-        res.cookie('jwt', token, {sameSite: 'none', secure: true, domain: 'dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app', maxAge: sessionLife * 1000});
+        res.cookie('jwt', token, {httpOnly: true, sameSite: 'none', secure: true, domain: 'dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app', maxAge: sessionLife * 1000});
         console.log('Cookie:', req.cookies);
         res.json({  email: user.email, username: user.username });
     } 
