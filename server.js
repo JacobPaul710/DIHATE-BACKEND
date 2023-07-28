@@ -14,14 +14,16 @@ app.get('/', (req, res) => {
     res.json('test')
 })
 
+
+app.use(express.json());
+app.use(cookieParser());
+
 app.use(cors({
     origin: 'https://dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app',
     credentials: true,
     exposedHeaders: ["set-cookie"]
 }
 ));
-app.use(express.json());
-app.use(cookieParser());
 
 app.use(authController);
 app.use(iceboxController)
