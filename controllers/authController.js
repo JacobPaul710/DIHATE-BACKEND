@@ -69,10 +69,10 @@ post_login = async  (req, res) => {
         console.log('Cookie:', req.cookies);
         res.json({  email: user.email, username: user.username });
     } 
-    catch (err) {
-        const errors = processErrors(err);
-        res.json({ errors });
-        console.log(errors);
+    catch (error) {
+        // const errors = processErrors(err);
+        // res.json({ errors });
+        console.log(error);
     }
 }
 
