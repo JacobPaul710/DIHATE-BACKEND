@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'jacobscott.tech',
+    origin: 'https://www.jacobscott.tech',
     credentials: true,
     exposedHeaders: ["set-cookie"]
 }
