@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'https://dihate-frontend-5r7o5hegn-jacobpaul710.vercel.app',
+    origin: 'jacobscott.tech',
     credentials: true,
     exposedHeaders: ["set-cookie"]
 }
